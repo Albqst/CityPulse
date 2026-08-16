@@ -1,0 +1,11 @@
+.artifacts
+.obj
+.bin
+.idea
+.packages
+.vs
+obj
+bin
+/Demographia.Live.sln.DotSettings.user
+.DS_Store
+Demographia.Live.sln.DotSettings.user
