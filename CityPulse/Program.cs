@@ -1,4 +1,5 @@
 using CityPulse.Authorization;
+using CityPulse.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +7,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args: args);
 var services = builder.Services;
+
+// builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<JwtService>();
+builder.Services.AddSingleton<PasswordHasher<CityPulse.Models.User>>();
+
 services.AddAuthorization(options =>
 {
     options.AddPolicy("MinimumAge18", policy =>
@@ -14,6 +20,11 @@ services.AddAuthorization(options =>
             new MinimumAgeRequirement(18));
     });
 });
+var hasher = new PasswordHasher<CityPulse.Models.User>();
+var user = new CityPulse.Models.User();
+var hash = hasher.HashPassword(user, "1");
+Console.WriteLine(hash);
+
 
 services.AddSingleton<
     IAuthorizationHandler,

@@ -8,14 +8,14 @@ namespace CityPulse.Controllers;
 public class RequestsController : ControllerBase
 {
     [HttpGet]
-    [Authorize]
+    // [Authorize]
     public IActionResult Get()
     {
         return Ok("Вы авторизованы.");
     }
 
     [HttpGet("adult")]
-    [Authorize(Policy = "MinimumAge18")]
+    // [Authorize(Policy = "MinimumAge18")]
     public IActionResult GetAdultContent()
     {
         return Ok("Вам есть 18 лет.");
