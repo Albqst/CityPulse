@@ -10,3 +10,5 @@ chmod +x reset-db.sh
 
 ### 4) Накатить миграции
 dotnet ef database update
+
+### 5) Выполнить скпикт заполнения ScriptFillingDbUsersAndRoles.md
