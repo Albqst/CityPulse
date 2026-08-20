@@ -10,29 +10,26 @@ namespace CityPulse.Controllers;
 [Route("api/[controller]")]
 public class AuthController(
     JwtService jwtService,
-    PasswordHasher<User> passwordHasher) : ControllerBase
+    PasswordHasher<User> passwordHasher,
+    UserService userService) : ControllerBase
 {
-    private static readonly List<User> Users = [];
-
     [HttpPost("register")]
-    public IActionResult Register(RegisterRequest request)
+    public async Task<IActionResult> Register(RegisterRequest request)
     {
-        if (Users.Any(x => x.Email == request.Email))
+        var existing = await userService.GetByEmailAsync(request.Email);
+        if (existing is not null)
             return Conflict("User already exists.");
 
         var user = new User
         {
-            Id = Users.Count + 1,
             Email = request.Email,
+            UserName = request.Email,
             DateOfBirth = request.DateOfBirth
         };
 
-        user.PasswordHash =
-            passwordHasher.HashPassword(
-                user,
-                request.Password);
+        user.PasswordHash = passwordHasher.HashPassword(user, request.Password);
 
-        Users.Add(user);
+        await userService.CreateAsync(user);
 
         return Ok(new
         {
@@ -43,10 +40,9 @@ public class AuthController(
     }
 
     [HttpPost("login")]
-    public IActionResult Login(LoginRequest request)
+    public async Task<IActionResult> Login(LoginRequest request)
     {
-        var user = Users.FirstOrDefault(
-            x => x.Email == request.Email);
+        var user = await userService.GetByEmailAsync(request.Email);
 
         if (user is null)
             return Unauthorized();

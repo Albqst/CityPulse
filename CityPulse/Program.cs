@@ -15,6 +15,7 @@ builder.Services.AddSingleton<JwtService>();
 builder.Services.AddSingleton<PasswordHasher<CityPulse.Models.User>>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<UserService>();
 
 
 services.AddAuthorization(options =>

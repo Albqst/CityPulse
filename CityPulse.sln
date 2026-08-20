@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityPulse", "CityPulse\CityPulse.csproj", "{0603635A-67A3-49CB-ACFA-2193DC9682F3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployBD", "deployBD", "{42981182-3D55-4937-8FB7-B7215B433D80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deploy", "deploy\deploy.csproj", "{F274E53C-727C-4E91-824F-AE2739CD7C89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,12 @@ Global
 		{0603635A-67A3-49CB-ACFA-2193DC9682F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0603635A-67A3-49CB-ACFA-2193DC9682F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0603635A-67A3-49CB-ACFA-2193DC9682F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F274E53C-727C-4E91-824F-AE2739CD7C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F274E53C-727C-4E91-824F-AE2739CD7C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F274E53C-727C-4E91-824F-AE2739CD7C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F274E53C-727C-4E91-824F-AE2739CD7C89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F274E53C-727C-4E91-824F-AE2739CD7C89} = {42981182-3D55-4937-8FB7-B7215B433D80}
 	EndGlobalSection
 EndGlobal
