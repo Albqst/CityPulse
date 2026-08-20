@@ -1,9 +1,11 @@
 using CityPulse.Authorization;
+using CityPulse.Database;
 using CityPulse.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args: args);
 var services = builder.Services;
@@ -11,6 +13,9 @@ var services = builder.Services;
 // builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<JwtService>();
 builder.Services.AddSingleton<PasswordHasher<CityPulse.Models.User>>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 services.AddAuthorization(options =>
 {
@@ -23,6 +28,7 @@ services.AddAuthorization(options =>
 var hasher = new PasswordHasher<CityPulse.Models.User>();
 var user = new CityPulse.Models.User();
 var hash = hasher.HashPassword(user, "1");
+Console.WriteLine(hash);
 Console.WriteLine(hash);
 
 
