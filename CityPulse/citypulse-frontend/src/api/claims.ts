@@ -1,0 +1,30 @@
+// 📌 Файл: src/api/claims.ts
+
+import api from "../services/api.ts";
+
+
+export interface Claim {
+  id: number;
+  title: string;
+  description: string;
+  lat: number;
+  lng: number;
+  status: string;
+}
+
+export async function getClaims(): Promise<Claim[]> {
+  const response = await api.get("/claims");
+  return response.data;
+}
+
+export interface CreateClaimDto {
+  title: string;
+  description: string;
+  lat: number;
+  lng: number;
+}
+
+export async function createClaim(dto: CreateClaimDto) {
+  const response = await api.post("/claims", dto);
+  return response.data;
+}

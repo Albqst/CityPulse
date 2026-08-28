@@ -1,0 +1,39 @@
+.claims-page {
+  padding: 32px;
+}
+
+.claims-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.claim-card {
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.claim-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.claim-status-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.claim-status-text {
+  font-size: 14px;
+  color: #555;
+}
+
+.claim-title {
+  font-size: 16px;
+  font-weight: 600;
+}

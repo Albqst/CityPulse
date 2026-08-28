@@ -1,0 +1,54 @@
+import { useState } from "react";
+import { login } from "../../services/auth.service";
+import "./LoginPage.css";
+
+const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const data = await login(email, password);
+
+      localStorage.setItem("accessToken", data.accessToken);
+
+      alert("Успешный вход!");
+      window.location.href = "/";
+    } catch (err) {
+      setError("Неверный email или пароль");
+    }
+  };
+
+  return (
+    <div className="auth-container">
+      <h2>Вход</h2>
+
+      {error && <p className="error">{error}</p>}
+
+      <form className="auth-form" onSubmit={handleLogin}>
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="Введите email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <label>Пароль</label>
+        <input
+          type="password"
+          placeholder="Введите пароль"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Войти</button>
+      </form>
+    </div>
+  );
+};
+
+export default LoginPage;
