@@ -14,7 +14,7 @@ export interface Claim {
 }
 
 export async function getClaims(): Promise<Claim[]> {
-  const response = await api.get("/claims");
+  const response = await api.get("/api/claims");
   return response.data;
 }
 
@@ -27,6 +27,6 @@ export interface CreateClaimDto {
 }
 
 export async function createClaim(dto: CreateClaimDto) {
-  const response = await api.post("/claims", dto);
+  const response = await api.post("/api/claims", dto);
   return response.data;
 }
