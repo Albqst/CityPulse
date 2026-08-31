@@ -7,6 +7,7 @@ export interface Claim {
   id: number;
   title: string;
   description: string;
+  address?: string;
   lat: number;
   lng: number;
   status: string;
@@ -20,6 +21,7 @@ export async function getClaims(): Promise<Claim[]> {
 export interface CreateClaimDto {
   title: string;
   description: string;
+  address?: string;
   lat: number;
   lng: number;
 }

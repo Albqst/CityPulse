@@ -13,6 +13,10 @@ const HomePage = () => {
   const token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
 
+  // Для выбора точки на карте
+  const [selectingOnMap, setSelectingOnMap] = useState(false);
+  const [selectedCoords, setSelectedCoords] = useState<{ lat: number; lng: number } | null>(null);
+
   useEffect(() => {
     if (!token) return;
 
@@ -59,11 +63,27 @@ const HomePage = () => {
 
       <section className="hero-row">
         <div className="claim-form-wrapper">
-          <ClaimForm />
+          <ClaimForm
+            onCreate={(c: any) => setClaims((prev) => [c, ...prev])}
+            onRequestMapSelection={() => {
+              setSelectingOnMap(true);
+              // снять ранее выбранные координаты
+              setSelectedCoords(null);
+            }}
+            selectedCoords={selectedCoords}
+          />
         </div>
 
         <div className="map-wrapper">
-          <Map claims={claims} />
+          <Map
+            claims={claims}
+            selecting={selectingOnMap}
+            onSelectLocation={(lat: number, lng: number) => {
+              setSelectedCoords({ lat, lng });
+              setSelectingOnMap(false);
+            }}
+            selectedLocation={selectedCoords}
+          />
         </div>
       </section>
     </div>
